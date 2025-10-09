@@ -96,15 +96,51 @@
       <!-- ========================= header-6 end ========================= -->
 
       <!-- ========================= hero-5 start ========================= -->
+		<style>
+  /* Blur arka plan (glass efekt) */
+  .hero-content-wrapper {
+    position: relative;
+    background: rgba(255, 255, 255, 0.15); /* azca ağ, şəffaf fon */
+    backdrop-filter: blur(10px); /* bulanıqlıq effekti */
+    -webkit-backdrop-filter: blur(10px); /* Safari üçün */
+    border-radius: 16px;
+    padding: 30px 40px;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 480px; /* istəyə görə daraldıla bilər */
+  }
+
+  .hero-content-wrapper h2,
+  .hero-content-wrapper p {
+    color: #fff;
+    margin: 0 0 15px;
+  }
+
+  .hero-content-wrapper a.button {
+    color: #fff;
+    border: 1px solid #fff;
+  }
+
+  .hero-content-wrapper a.button:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+</style>
+
+
+
       <div class="hero-section hero-style-5 img-bg" style="background-image: url('assets/img/hero/h1_hero.png')">
         <div class="container">
           <div class="row">
             <div class="col-lg-6">
-              <div class="hero-content-wrapper" style="color: white;">
-                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Tələt Nəbiyev</h2>
-                <p class="mb-30 wow fadeInUp" data-wow-delay=".4s">Tibb üzrə fəlsəfə doktoru, oftalmolog, mikrocərrah.</p>
-                <a href="#feature" class="button button-lg radius-50 wow fadeInUp" data-wow-delay=".6s">Göz xəstəlikləri haqqında <i class="lni lni-chevron-right"></i> </a>
-              </div>
+              <div class="hero-content-wrapper">
+  <h2 class="mb-30 wow fadeInUp" data-wow-delay=".2s">Tələt Nəbiyev</h2>
+  <p class="mb-30 wow fadeInUp" data-wow-delay=".4s">
+    Tibb üzrə fəlsəfə doktoru, oftalmolog, mikrocərrah.
+  </p>
+  <a href="#feature" class="button button-lg radius-50 wow fadeInUp" data-wow-delay=".6s">
+    Göz xəstəlikləri haqqında <i class="lni lni-chevron-right"></i>
+  </a>
+</div>
             </div>
             <div class="col-lg-6 align-self-end">
               <div class="hero-image wow fadeInUp" data-wow-delay=".5s">
@@ -441,14 +477,11 @@
 
     <!-- ========================= footer style-4 start ========================= -->
     <footer class="footer footer-style-4">
-      <div class="container">
-        <div class="widget-wrapper">
-         
+      
+                <div class="copyright-wrapper wow fadeInUp" data-wow-delay=".2s">
+          <p>Design and Developed by <a href="https://instagram.com/mrd.ysbv" rel="nofollow" target="_blank">Murad Yusibov</a></p>
         </div>
-        <div class="copyright-wrapper wow fadeInUp" data-wow-delay=".2s">
-          <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank">Murad Yusibov</a> Built-with <a href="https://uideck.com" rel="nofollow" target="_blank">Lindy UI Kit</a></p>
-        </div>
-      </div>
+    
     </footer>
     <!-- ========================= footer style-4 end ========================= -->
 
@@ -464,6 +497,7 @@
     <script src="assets/js/main.js"></script>
   </body>
 </html>
+
 
 
 
