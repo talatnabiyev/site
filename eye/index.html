@@ -1,13 +1,234 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oftalmoloji Pro - Göz Sağlığı Merkezi</title>
+    <!-- Tailwind CSS 4 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .serif { font-family: 'Playfair Display', serif; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden" x-data="{ mobileMenu: false, scrolled: false, selectedDisease: null }" @scroll.window="scrolled = (window.pageYOffset > 20)">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" 
+         :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200 py-3' : 'bg-transparent py-5'">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl uppercase group-hover:bg-blue-700 transition-colors">O</div>
+                <span class="font-bold text-xl tracking-tight uppercase" :class="scrolled ? 'text-slate-900' : 'text-slate-900 md:text-white'">Oftalmoloji Pro</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#home" class="transition-colors hover:text-blue-600" :class="scrolled ? 'text-slate-600' : 'text-slate-700 md:text-white'">Anasayfa</a>
+                <a href="#diseases" class="transition-colors hover:text-blue-600" :class="scrolled ? 'text-slate-600' : 'text-slate-700 md:text-white'">Hastalıklar</a>
+                <a href="#about" class="transition-colors hover:text-blue-600" :class="scrolled ? 'text-slate-600' : 'text-slate-700 md:text-white'">Doktorumuz</a>
+                <a href="tel:+902125550100" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold shadow-sm transition-all active:scale-95">Acil: +90 (212) 555 0100</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="md:hidden p-2 text-slate-900" @click="mobileMenu = !mobileMenu">
+                <i data-lucide="menu" x-show="!mobileMenu"></i>
+                <i data-lucide="x" x-show="mobileMenu"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white border-t border-slate-100 overflow-hidden transition-all duration-300" 
+             x-show="mobileMenu" x-cloak x-transition>
+            <div class="flex flex-col p-4 gap-4 font-medium">
+                <a href="#home" @click="mobileMenu = false" class="text-slate-600 py-2 border-b border-slate-50">Anasayfa</a>
+                <a href="#diseases" @click="mobileMenu = false" class="text-slate-600 py-2 border-b border-slate-50">Hastalıklar</a>
+                <a href="#about" @click="mobileMenu = false" class="text-slate-600 py-2 border-b border-slate-50">Doktorumuz</a>
+                <a href="tel:+902125550100" class="bg-blue-600 text-white text-center py-3 rounded-xl font-bold">Acil Hattı</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1576091160550-217359f42f8c?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 md:px-12 relative z-10 w-full">
+            <div class="max-w-2xl">
+                <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider mb-4">Göz Sağlığı ve Cerrahisi</span>
+                <h1 class="text-5xl md:text-7xl font-bold text-slate-900 leading-tight mb-6 serif italic">Net Bir Görüş, <br><span class="text-blue-600">Mutlu Bir Gelecek.</span></h1>
+                <p class="text-lg text-slate-600 mb-10 leading-relaxed max-w-lg">En son teknoloji ve uzman kadromuzla göz sağlığınızı korumak için buradayız. Modern cerrahi yöntemlerle yaşam kalitenizi artırıyoruz.</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#appointment" class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg">Randevu Al</a>
+                    <a href="#diseases" class="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 px-8 py-4 rounded-xl font-bold text-lg">Hastalıklar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diseases Section -->
+    <section id="diseases" class="py-24 bg-white" x-data="{ 
+        items: [
+            { id: 1, title: 'Katarakt', icon: 'eye', desc: 'Göz merceğinin saydamlığını kaybederek matlaşmasıdır.', symptoms: ['Bulanık görme', 'Gece görüşünde azalma'], treatment: 'Fako yöntemi ile dikişsiz operasyon.' },
+            { id: 2, title: 'Glokom', icon: 'activity', desc: 'Sinsi ilerleyen göz tansiyonu hastalığıdır.', symptoms: ['Göz ağrısı', 'Görüş daralması'], treatment: 'İlaç veya lazer tedavisi.' },
+            { id: 3, title: 'Retina', icon: 'target', desc: 'Diyabete bağlı veya yaşa bağlı sarı nokta hastalıkları.', symptoms: ['Merkezi görüş kaybı', 'Eğri görme'], treatment: 'Göz içi iğne veya lazer.' },
+            { id: 4, title: 'Lazer', icon: 'zap', desc: 'Miyop, hipermetrop ve astigmatın kalıcı tedavisi.', symptoms: ['Gözlük ihtiyacı', 'Uzağı görememe'], treatment: 'Excimer Lazer (Lasik/Lasek).' }
+        ]
+    }">
+        <div class="max-w-7xl mx-auto px-4 md:px-12">
+            <div class="text-center mb-16">
+                <h2 class="text-blue-600 font-bold uppercase tracking-widest text-xs mb-3">Uzmanlık Alanlarımız</h2>
+                <h3 class="text-4xl font-bold text-slate-900">Sık Karşılaşılan Hastalıklar</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <template x-for="item in items" :key="item.id">
+                    <div @click="selectedDisease = item" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:shadow-md transition-all cursor-pointer group">
+                        <div class="w-10 h-10 bg-white text-blue-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i :data-lucide="item.icon"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-blue-600 mb-2" x-text="item.title"></h4>
+                        <p class="text-xs text-slate-500 leading-normal" x-text="item.desc"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Detail Modal -->
+        <div class="fixed inset-0 z-[60] flex items-center justify-center p-4" x-show="selectedDisease" x-cloak>
+            <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" @click="selectedDisease = null"></div>
+            <div class="relative w-full max-w-lg bg-white rounded-[32px] shadow-2xl p-8 md:p-10 border border-slate-100" x-transition>
+                <button @click="selectedDisease = null" class="absolute top-6 right-6 p-2 hover:bg-slate-100 rounded-full"><i data-lucide="x"></i></button>
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-lg"><i :data-lucide="selectedDisease?.icon"></i></div>
+                    <h3 class="text-3xl font-bold text-slate-900" x-text="selectedDisease?.title"></h3>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Nedir?</h4>
+                        <p class="text-slate-600 leading-relaxed" x-text="selectedDisease?.desc"></p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-sm font-bold text-amber-500 uppercase tracking-widest mb-2 text-[10px]">Belirtiler</h4>
+                            <ul class="text-xs text-slate-500 space-y-1">
+                                <template x-for="symptom in selectedDisease?.symptoms">
+                                    <li class="flex items-center gap-1"><span class="w-1 h-1 bg-blue-600 rounded-full"></span><span x-text="symptom"></span></li>
+                                </template>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-green-500 uppercase tracking-widest mb-2 text-[10px]">Tedavi</h4>
+                            <p class="text-xs text-slate-500" x-text="selectedDisease?.treatment"></p>
+                        </div>
+                    </div>
+                    <a href="#appointment" @click="selectedDisease = null" class="block w-full bg-blue-600 text-white text-center py-4 rounded-xl font-bold">Muayene Randevusu Al</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Form -->
+    <section id="appointment" class="py-24 bg-slate-50 overflow-hidden" x-data="{ 
+        loading: false, 
+        done: false,
+        submitForm(e) {
+            this.loading = true;
+            const fd = new FormData(e.target);
+            const msg = `Merhaba, Randevu Talebi:%0AAd: ${fd.get('name')}%0ATel: ${fd.get('tel')}%0AServis: ${fd.get('service')}`;
+            setTimeout(() => {
+                this.loading = false;
+                this.done = true;
+                window.open(`https://wa.me/905550100000?text=${msg}`, '_blank');
+            }, 800);
+        }
+    }">
+        <div class="max-w-7xl mx-auto px-4 md:px-12 flex flex-col lg:flex-row gap-12 items-stretch">
+            <div class="w-full lg:w-5/12 flex flex-col justify-center">
+                <span class="text-blue-600 font-bold uppercase tracking-widest text-xs mb-3">İletişime Geçin</span>
+                <h3 class="text-4xl font-bold text-slate-900 mb-6 serif italic">Göz Sağlığınız Ertelemeye Gelmez.</h3>
+                <p class="text-slate-500 mb-8 leading-relaxed">Formu doldurun, talebinizi WhatsApp üzerinden doğrudan doktorumuza iletin.</p>
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 space-y-4">
+                    <div class="flex items-center gap-4"><div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600"><i data-lucide="clock"></i></div><div><div class="text-sm font-bold">Mesai Saatleri</div><div class="text-xs text-slate-400">Pzt-Cmt: 09:00 - 18:30</div></div></div>
+                    <div class="flex items-center gap-4"><div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600"><i data-lucide="phone"></i></div><div><div class="text-sm font-bold">Acil Hat</div><div class="text-xs text-slate-400">+90 (212) 555 0100</div></div></div>
+                </div>
+            </div>
+            
+            <div class="w-full lg:w-7/12">
+                <div class="bg-blue-700 p-8 md:p-10 rounded-[32px] text-white shadow-xl relative overflow-hidden h-full">
+                    <div x-show="!done" class="h-full flex flex-col">
+                        <form @submit.prevent="submitForm($event)" class="space-y-4 text-xs">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-1">
+                                    <label class="uppercase font-bold text-blue-200 text-[10px]">Ad Soyad</label>
+                                    <input required name="name" type="text" placeholder="Mehmet Yılmaz" class="bg-blue-800/50 border border-blue-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-blue-300">
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label class="uppercase font-bold text-blue-200 text-[10px]">Telefon</label>
+                                    <input required name="tel" type="tel" placeholder="05xx..." class="bg-blue-800/50 border border-blue-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-blue-300">
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="uppercase font-bold text-blue-200 text-[10px]">E-posta</label>
+                                <input required name="email" type="email" placeholder="mail@ornek.com" class="bg-blue-800/50 border border-blue-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder:text-blue-300">
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <label class="uppercase font-bold text-blue-200 text-[10px]">Servis</label>
+                                <select name="service" class="bg-blue-800/50 border border-blue-500 rounded-xl px-4 py-3 focus:outline-none appearance-none">
+                                    <option class="text-slate-900">Genel Muayene</option>
+                                    <option class="text-slate-900">Katarakt Operasyonu</option>
+                                    <option class="text-slate-900">Lazer Kontrol</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full bg-white text-blue-700 font-bold py-4 rounded-xl shadow-lg mt-4 flex items-center justify-center gap-2 hover:bg-blue-50 transition-all text-sm">
+                                <span x-show="!loading">WhatsApp ile Randevu Al</span>
+                                <span x-show="loading" class="w-5 h-5 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></span>
+                            </button>
+                        </form>
+                    </div>
+                    <div x-show="done" class="h-full flex flex-col items-center justify-center text-center p-8" x-cloak>
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4"><i data-lucide="check-circle" class="w-8 h-8"></i></div>
+                        <h4 class="text-2xl font-bold mb-2">Talebiniz Alındı!</h4>
+                        <p class="text-blue-100 text-sm">WhatsApp'a yönlendirildiniz. En kısa sürede yanıt vereceğiz.</p>
+                        <button @click="done = false" class="mt-6 text-white text-xs underline">Yeni Randevu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-12 px-4 md:px-12 text-center md:text-left">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold uppercase">O</div>
+                <span class="font-bold text-slate-900 uppercase">Oftalmoloji Pro</span>
+            </div>
+            <p class="text-[11px] text-slate-400 font-medium">© 2024 Sağlık Merkezi. Tüm hakları saklıdır.</p>
+            <div class="flex gap-6 uppercase text-[11px] font-bold text-slate-400">
+                <a href="#" class="hover:text-blue-600">KVKK</a>
+                <a href="#" class="hover:text-blue-600">Gizlilik</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+        
+        // Dynamic re-init icons for Alpine items
+        document.addEventListener('alpine:initialized', () => {
+             lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
